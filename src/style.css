@@ -1,0 +1,42 @@
+h1,
+#day-time-condition {
+  text-align: right;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li:first-letter {
+  text-transform: capitalize;
+}
+
+.weather-app-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+#day-time-condition,
+#humidity-wind {
+  margin: 0;
+  padding: 0;
+}
+
+#current-icon,
+#current-temp {
+  font-size: 60px;
+}
+
+#units {
+  position: relative;
+  top: -30px;
+}
+
+#humidity-wind {
+  text-align: center;
+}
