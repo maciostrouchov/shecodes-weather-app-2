@@ -40,3 +40,9 @@ li:first-letter {
 #humidity-wind {
   text-align: center;
 }
+
+#units .active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+  text-decoration: none;
+}
