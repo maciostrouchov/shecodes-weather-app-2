@@ -1,3 +1,5 @@
+//need to update time to read as response of city input; currently reading local time?
+
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
