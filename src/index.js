@@ -35,6 +35,31 @@ function displayTemp(response) {
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+  days.forEach(function)(day) {
+  forecastHTML = forecastHTML +
+    `
+    <div class="col">
+      <div class="forecast-date">${day}</div>
+        <img src="" alt="" />
+        <div class="forecast-temps">
+          <span class="forecast-temp-min">18°</span>
+          <span class="forecast-temp-max">22°</span>
+        </div>
+      </div>
+    </div>
+  `;
+  });
+  forecastHTML = forecastHTML + `</div`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
+
 function search(city) {
   let openWeatherApiKey = "71e82cb7acd47b60b16fae0fd4740ffd";
   let openWeatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${openWeatherApiKey}`;
