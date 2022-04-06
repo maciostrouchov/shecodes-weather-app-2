@@ -15,31 +15,13 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayTemp(response) {
-  let currentIconElement = document.querySelector("#current-icon");
-  let tempElement = document.querySelector("#current-temp");
-  let cityElement = document.querySelector("#current-city");
-  let currentConditionElement = document.querySelector("#current-condition");
-  let humidityElement = document.querySelector("#humidity");
-  let windElement = document.querySelector("#wind");
-  let dateElement = document.querySelector("#day-time");
-
-  currentIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
-  currentIconElement.setAttribute("alt", response.data.weather[0].description);
-  tempElement.innerHTML = Math.round(response.data.main.temp);
-  fahrenheitTemperature = response.data.main.temp;
-  cityElement.innerHTML = response.data.name;
-  currentConditionElement.innerHTML = response.data.weather[0].description;
-  humidityElement.innerHTML = response.data.main.humidity;
-  windElement.innerHTML = Math.round(response.data.wind.speed);
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
-}
-
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = `<span class="row">`;
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<span class="row">`;
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -55,16 +37,45 @@ function displayForecast() {
     </div>
   `;
   });
+
   forecastHTML = forecastHTML + `</span>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "71e82cb7acd47b60b16fae0fd4740ffd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayTemp(response) {
+  let currentIconElement = document.querySelector("#current-icon");
+  let tempElement = document.querySelector("#current-temp");
+  let cityElement = document.querySelector("#current-city");
+  let currentConditionElement = document.querySelector("#current-condition");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let dateElement = document.querySelector("#day-time");
+
+  currentIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  currentIconElement.setAttribute("alt", response.data.weather[0].description);
+
+  tempElement.innerHTML = Math.round(response.data.main.temp);
+  fahrenheitTemperature = response.data.main.temp;
+  cityElement.innerHTML = response.data.name;
+  currentConditionElement.innerHTML = response.data.weather[0].description;
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  getForecast(response.data.coord);
+}
 
 function search(city) {
-  let openWeatherApiKey = "71e82cb7acd47b60b16fae0fd4740ffd";
-  let openWeatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${openWeatherApiKey}`;
-  axios.get(openWeatherApiUrl).then(displayTemp);
+  let apiKey = "71e82cb7acd47b60b16fae0fd4740ffd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayTemp);
 }
 
 function handleSubmit(event) {
