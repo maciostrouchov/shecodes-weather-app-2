@@ -1,5 +1,3 @@
-//need to update time to read as response of city input; currently reading local time?
-
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -33,17 +31,16 @@ function displayForecast(response) {
       forecastHTML =
         forecastHTML +
         `
-    <div class="col">
-      <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
-        ${index}
-        <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" />
-        <div class="forecast-temps">
-          <span class="forecast-temp-max">${Math.round(forecastDay.temp.max)}°</span>
-          <span class="forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
-        </div>
-      </div>
-    </div>
-  `;
+          <div class="col">
+            <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
+              <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" />
+              <div class="forecast-temps">
+               <span class="forecast-temp-max">${Math.round(forecastDay.temp.max)}°</span>
+               <span class="forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
+              </div>
+           </div>
+          </div>
+        `;
     }
   });
 
@@ -75,7 +72,7 @@ function displayTemp(response) {
   currentConditionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  dateElement.innerHTML = "Last updated: " + formatDate(response.data.dt * 1000);
 
   getForecast(response.data.coord);
 }
@@ -95,4 +92,4 @@ function handleSubmit(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-search("New York");
+// search("New York"); // removing temporarily to avoid over-calling API
