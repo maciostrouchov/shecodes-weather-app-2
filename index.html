@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather</title>
+    <title>Weather Jams</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,30 +31,79 @@
         </div>
       </form>
       <div class="container">
-        <div class="row">
-          <div class="col">
-            <span id="clearfix">
-              <img id="current-icon" class="float-left" />
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <span id="current-icon-temp">
+              <img id="current-icon" />
             </span>
             <span id="current-temp"> </span>
             <span id="units"> °F </span>
           </div>
-          <div class="col mt-3">
-            <ul id="humidity-wind">
-              <li>Humidity: <span id="humidity"></span>%</li>
-              <li>Wind: <span id="wind"></span> mph</li>
-            </ul>
-          </div>
-          <div class="col">
-            <h1 id="current-city"></h1>
-            <ul id="day-time-condition">
-              <li id="day-time"></li>
-              <li id="current-condition"></li>
+          <div class="col-auto">
+            <ul id="day-time-condition-humidity-wind">
+              <li><h1 id="current-city"></h1></li>
+              <li><span id="day-time"></span>, <span id="current-condition"></span></li>
+              <li>
+                <strong>Humidity: </strong><span id="humidity"></span>%, <strong>Wind: </strong
+                ><span id="wind"></span> mph
+              </li>
             </ul>
           </div>
         </div>
         <div class="forecast" id="forecast"></div>
       </div>
+      <div class="hr mt-5 mb-5"><hr /></div>
+      <div class="iframe-heading mb-4">Here's a playlist to match the weather's mood today 🎧</div>
+      <iframe
+        id="rainy-playlist"
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DXbvABJXBIyiY?utm_source=generator"
+        width="700px"
+        height="100px"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
+      <iframe
+        id="sunny-playlist"
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DX1BzILRveYHb?utm_source=generator"
+        width="700px"
+        height="100px"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
+      <iframe
+        id="cloudy-playlist"
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/playlist/2HfnDpzHpfrFXZAIBeVFop?utm_source=generator"
+        width="700px"
+        height="100"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
+      <iframe
+        id="snowy-playlist"
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/playlist/4K76bc4dr4VmGYddpJUv37?utm_source=generator"
+        width="700px"
+        height="100px"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
+      <iframe
+        id="atmosphere-playlist"
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/playlist/5dECQ3s1DoOY9C4wx0gj4L?utm_source=generator"
+        width="700px"
+        height="100"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
       <div class="hr mt-5"><hr /></div>
       <div>
         <p class="text-center mt-5">
@@ -63,6 +112,7 @@
         </p>
       </div>
     </div>
+    <script src="https://open.spotify.com/embed-podcast/iframe-api/v1" async></script>
     <script src="src/index.js"></script>
   </body>
 </html>

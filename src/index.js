@@ -72,9 +72,10 @@ function displayTemp(response) {
   currentConditionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  dateElement.innerHTML = "Last updated: " + formatDate(response.data.dt * 1000);
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
   getForecast(response.data.coord);
+  handleDisplay(response.data.weather[0].description.toLowerCase());
 }
 
 function search(city) {
@@ -89,7 +90,64 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
+function handleDisplay(currentCondition) {
+  let rainyPlaylistElement = document.querySelector("#rainy-playlist");
+  if (
+    currentCondition.includes("rain") ||
+    currentCondition.includes("thunderstorm") ||
+    currentCondition.includes("drizzle")
+  ) {
+    rainyPlaylistElement.style.display = "block";
+  } else {
+    rainyPlaylistElement.style.display = "none";
+  }
+
+  let sunnyPlaylistElement = document.querySelector("#sunny-playlist");
+  if (currentCondition.includes("clear")) {
+    sunnyPlaylistElement.style.display = "block";
+  } else {
+    sunnyPlaylistElement.style.display = "none";
+  }
+
+  let cloudyPlaylistElement = document.querySelector("#cloudy-playlist");
+  if (currentCondition.includes("cloud")) {
+    cloudyPlaylistElement.style.display = "block";
+  } else {
+    cloudyPlaylistElement.style.display = "none";
+  }
+
+  let snowyPlaylistElement = document.querySelector("#snowy-playlist");
+  if (
+    currentCondition.includes("snow") ||
+    currentCondition.includes("sleet") ||
+    currentCondition.includes("freezing rain") ||
+    currentCondition.includes("light rain and snow") ||
+    currentCondition.includes("rain and snow")
+  ) {
+    snowyPlaylistElement.style.display = "block";
+  } else {
+    snowyPlaylistElement.style.display = "none";
+  }
+
+  let atmospherePlaylistElement = document.querySelector("#atmosphere-playlist");
+  if (
+    currentCondition.includes("mist") ||
+    currentCondition.includes("tornado") ||
+    currentCondition.includes("squalls") ||
+    currentCondition.includes("volcanic") ||
+    currentCondition.includes("dust") ||
+    currentCondition.includes("sand") ||
+    currentCondition.includes("fog") ||
+    currentCondition.includes("haze") ||
+    currentCondition.includes("smoke")
+  ) {
+    atmospherePlaylistElement.style.display = "block";
+  } else {
+    atmospherePlaylistElement.style.display = "none";
+  }
+}
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-// search("New York"); // removing temporarily to avoid over-calling API
+search("New York");
